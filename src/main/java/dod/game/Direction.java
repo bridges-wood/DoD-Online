@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 /**
  * Directions allowed for {@link Command commands}.

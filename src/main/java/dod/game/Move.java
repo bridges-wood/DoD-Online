@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 /** Contains all information relevant for moves. */
 public class Move extends Command {

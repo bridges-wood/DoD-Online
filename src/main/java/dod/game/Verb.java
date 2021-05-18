@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 /** All possible {@link Command commands} an {@link Agent agent} can execute. */
 public enum Verb {

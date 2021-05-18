@@ -1,9 +1,9 @@
-package main.game;
+package dod.game;
 
 import java.awt.Point;
 import java.util.Stack;
 
-import main.search.AStar;
+import dod.search.AStar;
 
 /** AI player that attempts to pursue the player. */
 public class BotPlayer extends Agent {

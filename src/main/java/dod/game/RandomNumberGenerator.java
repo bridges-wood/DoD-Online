@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 import java.awt.Point;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package main.search;
+package dod.search;
 
 import java.awt.Point;
 

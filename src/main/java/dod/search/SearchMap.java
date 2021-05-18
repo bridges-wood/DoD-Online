@@ -1,10 +1,10 @@
-package main.search;
+package dod.search;
 
 import java.awt.Point;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import main.game.BotPlayer;
+import dod.game.BotPlayer;
 
 /** Specialised version of the map for idiomatic searching. */
 public class SearchMap {

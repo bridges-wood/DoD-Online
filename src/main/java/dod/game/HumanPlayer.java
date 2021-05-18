@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

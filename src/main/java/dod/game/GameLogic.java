@@ -1,7 +1,12 @@
-package main.game;
+package dod.game;
 
 import java.awt.Point;
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Contains main logic.
@@ -11,14 +16,21 @@ public class GameLogic {
     private HumanPlayer player = new HumanPlayer();
     private BotPlayer bot = new BotPlayer();
     // ! This may need to be changed based on how the file is run.
-    private final String MAPS_PATH = "./maps/";
+    private final String MAPS_PATH = "dod/maps";
+    /**
+     * Loader for accessing map files.
+     */
+    private final ClassLoader cl = Thread.currentThread().getContextClassLoader();
 
     /**
      * Default constructor. Presents map selection menu to the player and loads.
      */
     public GameLogic() {
-        displayMenu();
-        String mapChoice = parseMapSelection();
+        String mapChoice = null;
+        boolean maps = displayMenu();
+        if (maps) {
+            mapChoice = parseMapSelection();
+        }
         this.map = new Map(mapChoice);
         map.spawnAgent(player);
         map.spawnAgent(bot);
@@ -72,19 +84,28 @@ public class GameLogic {
     /**
      * Displays the menu to the user. Consists of a list of all the available maps
      * the player can choose.
+     * 
+     * @return true if maps were found, false otherwise.
      */
-    private void displayMenu() {
-        System.out.println("--- MAPS ---");
-        try {
-            String[] pathnames = new File(MAPS_PATH).list();
-            for (String pathname : pathnames) {
-                if (pathname.endsWith(".txt"))
-                    System.out.println(pathname);
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Could not find any maps.");
-        }
+    boolean displayMenu() {
+        try (final InputStream is = cl.getResourceAsStream(MAPS_PATH);
+                final InputStreamReader isr = new InputStreamReader(is);
+                final BufferedReader br = new BufferedReader(isr)) {
+            List<String> maps = br.lines().collect(Collectors.toList());
+            maps.removeIf(file -> !file.endsWith(".txt"));
 
+            if (maps.size() == 0)
+                throw new IOException("No maps found.");
+
+            System.out.println("--- MAPS ---");
+            for (final String file : maps) {
+                System.out.println(file);
+            }
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -94,7 +115,8 @@ public class GameLogic {
      */
     private String parseMapSelection() {
         System.out.println("Please select a map.");
-        return MAPS_PATH + player.getInputFromConsole();
+        String finalPath = MAPS_PATH + "/" + player.getInputFromConsole();
+        return finalPath;
     }
 
     /**

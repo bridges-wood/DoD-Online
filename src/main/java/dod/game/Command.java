@@ -1,4 +1,4 @@
-package main.game;
+package dod.game;
 
 /** Class containing all command information. */
 public class Command {

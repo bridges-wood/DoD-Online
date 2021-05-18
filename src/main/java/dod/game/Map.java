@@ -1,8 +1,8 @@
-package main.game;
+package dod.game;
 
 import java.awt.Point;
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 
@@ -11,6 +11,11 @@ import java.util.ArrayList;
  *
  */
 public class Map {
+	/**
+	 * Loader for accessing map files.
+	 */
+	private final ClassLoader cl = Thread.currentThread().getContextClassLoader();
+
 	/** Random seed for placing agents in the map */
 	private RandomNumberGenerator gen = new RandomNumberGenerator();
 
@@ -84,7 +89,7 @@ public class Map {
 	 * @throws Exception If the map cannot be read.
 	 */
 	protected void readMap(String filename) throws Exception {
-		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(cl.getResource(filename).openStream()))) {
 			this.mapName = br.readLine();
 			this.goldRequired = Integer.parseInt(br.readLine().split(" ")[1]);
 			ArrayList<String> rawMap = new ArrayList<String>();
