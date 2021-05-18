@@ -1,12 +1,17 @@
 package dod.game;
 
 import java.awt.Point;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.net.URI;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Contains main logic.
@@ -88,12 +93,21 @@ public class GameLogic {
      * @return true if maps were found, false otherwise.
      */
     boolean displayMenu() {
-        try (final InputStream is = cl.getResourceAsStream(MAPS_PATH);
-                final InputStreamReader isr = new InputStreamReader(is);
-                final BufferedReader br = new BufferedReader(isr)) {
-            List<String> maps = br.lines().collect(Collectors.toList());
-            maps.removeIf(file -> !file.endsWith(".txt"));
+        try {
+            URI uri = cl.getResource(MAPS_PATH).toURI();
+            Path path;
+            if (uri.getScheme().equals("jar")) {
+                FileSystem fs = FileSystems.newFileSystem(uri, Collections.<String, Object>emptyMap());
+                path = fs.getPath(MAPS_PATH);
+            } else {
+                path = Paths.get(uri);
+            }
+            Stream<Path> walk = Files.walk(path, 1);
 
+            List<String> maps = walk.map(file -> file.getFileName().toString()).collect(Collectors.toList());
+            walk.close();
+
+            maps.removeIf(file -> !file.endsWith(".txt"));
             if (maps.size() == 0)
                 throw new IOException("No maps found.");
 
