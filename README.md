@@ -3,7 +3,7 @@
 ### Prerequisites
 
 - JRE 11.0.9 or above.
-- Maven 3.63 or above.
+- Maven 3.6.3 or above.
 
 ## Installation
 
