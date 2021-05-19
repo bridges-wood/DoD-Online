@@ -1,4 +1,4 @@
-package dod.search;
+package com.volatil.dod.search;
 
 import java.awt.Point;
 

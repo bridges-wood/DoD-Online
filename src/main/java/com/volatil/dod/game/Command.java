@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 /** Class containing all command information. */
 public class Command {
@@ -34,6 +34,7 @@ public class Command {
           this.v = Verb.LOOK;
           break;
         case "QUIT":
+        case "EXIT":
           this.v = Verb.QUIT;
           break;
         default:

@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 import java.awt.Point;
 import java.util.Random;

@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.bridgeswood</groupId>
+  <groupId>com.volatil</groupId>
   <artifactId>dod</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
-  <name>Dungeon of Doom</name>
+  <name>Dungeon of Doom (Online)</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,10 +13,9 @@
   </properties>
 
   <build>
-    <finalName>release</finalName>
     <resources>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>src/main/resources/com/volatil/dod</directory>
         <includes>
           <include>**/*.txt</include>
         </includes>
@@ -30,9 +29,6 @@
         <configuration>
           <archive>
             <index>true</index>
-            <manifest>
-              <mainClass>dod.game.GameLogic</mainClass>
-            </manifest>
           </archive>
         </configuration>
       </plugin>

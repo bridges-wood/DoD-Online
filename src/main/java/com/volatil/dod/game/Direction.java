@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 /**
  * Directions allowed for {@link Command commands}.

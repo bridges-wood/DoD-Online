@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 import java.awt.Point;
 import java.io.BufferedReader;
@@ -134,7 +134,7 @@ public class Map {
 		while (!isValidStartPosition(location)) {
 			location = gen.randomLocation(map);
 		}
-		map[location.y][location.x] = agent instanceof HumanPlayer ? 'P' : 'B';
+		map[location.y][location.x] = agent instanceof RemotePlayer ? 'P' : 'B';
 		agent.updateLocation(location, '.');
 	}
 
@@ -179,15 +179,15 @@ public class Map {
 	 * @param next  The next position the agent will occupy.
 	 * @param agent The agent moving to the new position.
 	 */
-	public void moveAgent(Point next, Agent agent) {
+	public String moveAgent(Point next, Agent agent) {
 		Point last = agent.getLocation();
 		map[last.y][last.x] = agent.getUnderneath();
 		if (map[next.y][next.x] == 'P' && agent instanceof BotPlayer) {
-			System.out.println("LOSE");
-			System.exit(0);
+			return "LOSE";
 		}
 		agent.updateLocation(next, map[next.y][next.x]);
-		map[next.y][next.x] = agent instanceof HumanPlayer ? 'P' : 'B';
+		map[next.y][next.x] = agent instanceof RemotePlayer ? 'P' : 'B';
+		return "Success";
 	}
 
 	/**

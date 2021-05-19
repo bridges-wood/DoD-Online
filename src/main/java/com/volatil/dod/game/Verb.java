@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 /** All possible {@link Command commands} an {@link Agent agent} can execute. */
 public enum Verb {

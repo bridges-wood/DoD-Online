@@ -1,5 +1,6 @@
 # Env
 .vscode
+.settings
 
 # Build
 target

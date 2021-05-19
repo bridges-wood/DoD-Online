@@ -1,4 +1,4 @@
-package dod.game;
+package com.volatil.dod.game;
 
 /** Contains all information relevant for moves. */
 public class Move extends Command {

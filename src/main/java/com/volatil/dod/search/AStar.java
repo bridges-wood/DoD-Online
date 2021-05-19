@@ -1,12 +1,12 @@
-package dod.search;
+package com.volatil.dod.search;
 
 import java.awt.Point;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
-import dod.game.BotPlayer;
-import dod.game.Direction;
+import com.volatil.dod.game.BotPlayer;
+import com.volatil.dod.game.Direction;
 
 /** Implementation of A* search algorithm for {@link BotPlayer} pathfinding. */
 public class AStar {
